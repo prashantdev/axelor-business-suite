@@ -19,6 +19,7 @@
 		    	<field name="name"/>
 			    <field name="code" x-bind="{{code|unaccent|uppercase}}" />
 			    <field name="parent" form-view="company-form" grid-view="company-grid"/>
+			    <field name="gstin" if-module="axelor-gst" if="__config__.app.isApp('gst')"/>
 			    <field name="partner" canNew="true" domain="self.isContact = false" form-view="partner-form" grid-view="partner-grid"/>
 		    </panel>
 		    <field name="address" canNew="true" colSpan="12" form-view="address-form" grid-view="address-grid"/>

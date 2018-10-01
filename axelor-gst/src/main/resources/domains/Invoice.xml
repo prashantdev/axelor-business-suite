@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+
+	 <module name="Account" package="com.axelor.apps.account.db"/>
+
+	<entity name="Invoice" lang="java" cachable="true">
+
+		<decimal name="netAmount" readonly="true" title="Net Amount" />
+		<decimal name="netIgst" readonly="true" title="Net IGST" />
+		<decimal name="netSgst" readonly="true" title="Net SGST" />
+		<decimal name="netCgst" readonly="true" title="Net CGST" />
+		<decimal name="grossAmt" readonly="true" title="Gross Amount" />
+	</entity>
+
+</domain-models> 

@@ -206,6 +206,7 @@
                         ]]></viewer>
                     </field>
                 </panel>
+                <field name="gstin" if-module="axelor-gst" if="__config__.app.isApp('gst')"/>	
 			</panel>
 		</panel>
 		<panel-related field="contactPartnerSet" hideIf="!id || isContact || partnerTypeSelect == 2" domain="self.isContact = 'true'" form-view="partner-contact-form" grid-view="partner-contact-grid" />
@@ -355,7 +356,9 @@
 				<field name="name" css="highlight" onChange="action-partner-record-full-name"/>
 				<field name="firstName" hideIf="partnerTypeSelect != 2" css="highlight" onChange="action-partner-record-full-name"/>
 				<field name="partnerCategory" widget="SuggestBox"/>
+				 <field name="gstin" if-module="axelor-gst" if="__config__.app.isApp('gst')"/>	
 				<field name="partnerTypeSelect" onChange="action-partner-partner-type-select-change"/>
+				
 				<field name="isContact" hideIf="partnerTypeSelect != 2"/>
 				<spacer/>
 				<field name="mainPartner" hideIf="!isContact" form-view="partner-form" grid-view="partner-grid"/>
@@ -603,7 +606,9 @@
 					<field name="mainPartner" domain="self.isContact = false" form-view="partner-form" grid-view="partner-grid"/>
 				</panel>
 				<field name="isContact" hidden="true" colSpan="12"/>
-				<field name="isEmployee" readonly="true" colSpan="12"/>
+				<field name="isEmployee" readonly="true" colSpan="12"/>	
+				<field name="gstin" if-module="axelor-gst" if="__config__.app.isApp('gst')"/>	
+				
 			</panel>
 		</panel>
 		<panel-tabs>

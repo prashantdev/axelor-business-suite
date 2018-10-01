@@ -22,6 +22,7 @@
 			<field name="addressL5" x-bind="{{addressL5|uppercase}}" placeholder="e.g. POB 254"/>
 			<field name="zip"/>
 			<field name="city" onSelect="action-address-attrs-update-domain-city" canEdit="false" canNew="true" onChange="action-address-change-city" form-view="city-form" grid-view="city-grid"/>
+			<field name="state" if-module="axelor-gst" if="__config__.app.isApp('gst')" />
 			<field name="addressL6" x-bind="{{addressL6|uppercase}}" required="true" colSpan="12"/>
 			<static name="addressL6Text" colSpan="12">Notice: The Zip/City field is automatically filled when the city is selected. You can change it when the Zip/City pair is missing or in case of minor change.</static>
 			<button-group colSpan="6" hideIf="$popup()">
@@ -55,6 +56,7 @@
 			<field name="addressL5" x-bind="{{addressL5|uppercase}}" placeholder="e.g. POB 254"/>
             <field name="zip" />
 			<field name="city" onSelect="action-address-attrs-update-domain-city" canEdit="false" canNew="true" onChange="action-address-change-city" form-view="city-form" grid-view="city-grid"/>
+			<field name="state" if-module="axelor-gst" if="__config__.app.isApp('gst')" />
 			<field name="addressL6" x-bind="{{addressL6|uppercase}}" required="true" colSpan="12"/>
 			<static name="addressL6Text" colSpan="12">Notice: The Zip/City field is automatically filled when the city is selected. You can change it when the Zip/City pair is missing or in case of minor change.</static>
 			<field name="isInvoicingAddr" type="boolean" showIf="$popup() &amp;&amp; id == null" title="Invoicing address" />
