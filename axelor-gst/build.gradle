@@ -6,19 +6,20 @@ apply {
 	version = absVersion
 }
 
-spotless {
-        java {
-                googleJavaFormat()
-        }
+spotless { 
+	java {  
+		googleJavaFormat()
+	} 
 }
 
-
 axelor {
-	title "Axelor :: GST"
-	description "Axelor GST Module"
+	title "Axelor GST"
+	description "Axelor Gst Module"
 }
 
 dependencies {
 	compile project(":modules:axelor-base")
 	compile project(":modules:axelor-account")
+	compile project(":modules:axelor-supplychain")
+	compile project(":modules:axelor-business-project")	
 }

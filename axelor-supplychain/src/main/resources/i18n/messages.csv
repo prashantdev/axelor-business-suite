@@ -265,6 +265,7 @@
 "Purchase order line",,,
 "Purchase orders",,,
 "Purchase proposal",,,
+"Purchases orders",,,
 "Qty",,,
 "Qty to invoice",,,
 "Quantity cannot be lower than already delivered quantity on detail line %s.",,,

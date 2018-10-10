@@ -9,7 +9,7 @@
 
 		<string name="name" title="Name" required="true" initParam="true"
 			translatable="true" />
-		<string name="serialNumber" title="Serial Nbr"/>
+		<string name="serialNumber" title="Serial Nbr" />
 		<string name="sequence" title="Product N°" readonly="true" />
 		<string name="code" title="Code" required="true" initParam="true" />
 
@@ -22,15 +22,15 @@
 		<many-to-one name="productCategory" ref="ProductCategory"
 			title="Product category" initParam="true" massUpdate="true" />
 		<many-to-one name="productFamily" ref="ProductFamily"
-			title="Family" initParam="true" massUpdate="true"/>
+			title="Family" initParam="true" massUpdate="true" />
 		<many-to-one name="unit" ref="Unit" title="Unit"
 			initParam="true" massUpdate="true" />
 
 		<integer name="saleSupplySelect" title="Sale supply default method on sale order"
-			selection="product.sale.supply.select" initParam="true" massUpdate="true"/>
+			selection="product.sale.supply.select" initParam="true" massUpdate="true" />
 
 		<string name="productTypeSelect" title="Type" required="true"
-			selection="product.product.type.select" initParam="true" massUpdate="true"/>
+			selection="product.product.type.select" initParam="true" massUpdate="true" />
 		<string name="procurementMethodSelect" title="Procurement method"
 			selection="product.procurement.method.select" initParam="true" />
 		<boolean name="isPrototype" title="Prototype" />
@@ -97,8 +97,10 @@
 
 		<many-to-one name="barCode" title="Barcode"
 			ref="com.axelor.meta.db.MetaFile" />
-		<many-to-one name="barcodeTypeConfig" title="Barcode Type" ref="com.axelor.apps.base.db.BarcodeTypeConfig"/>
-		<string name="fullName" title="Full name" namecolumn="true" translatable="true" />
+		<many-to-one name="barcodeTypeConfig" title="Barcode Type"
+			ref="com.axelor.apps.base.db.BarcodeTypeConfig" />
+		<string name="fullName" title="Full name" namecolumn="true"
+			translatable="true" />
 
 
 		<many-to-one name="weightUnit" ref="com.axelor.apps.base.db.Unit"
@@ -114,20 +116,20 @@
 		<decimal name="diameter" title="Diameter" />
 		<decimal name="articleVolume" title="Article volume" />
 
-		<boolean name="isShippingCostsProduct" title="Is shipping costs product"/>
+		<boolean name="isShippingCostsProduct" title="Is shipping costs product" />
 
 		<one-to-many name="saleProductMultipleQtyList"
 			ref="com.axelor.apps.base.db.ProductMultipleQty" mappedBy="saleProduct"
-			title="Multiple quantities" orderBy="multipleQty"/>
-		
-		<boolean name="allowToForceSaleQty" title="Allow to force sales quantities"/>
-		
+			title="Multiple quantities" orderBy="multipleQty" />
+
+		<boolean name="allowToForceSaleQty" title="Allow to force sales quantities" />
+
 		<one-to-many name="purchaseProductMultipleQtyList"
 			ref="com.axelor.apps.base.db.ProductMultipleQty" mappedBy="purchaseProduct"
 			title="Multiple quantities" orderBy="multipleQty" />
-			
-		<boolean name="allowToForcePurchaseQty" title="Allow to force purchases quantities"/>
-			
+
+		<boolean name="allowToForcePurchaseQty" title="Allow to force purchases quantities" />
+
 
 		<extra-code>
 	   		<![CDATA[

@@ -5,9 +5,9 @@
 
 	<module name="base" package="com.axelor.apps.base.db" />
 
-	<entity name="Product" lang="java" cachable="true">
+	<entity name="Product" lang="java">
 		<string name="hsbn" title="HSBN" />
 		<decimal name="gstRate" title="GST Rate" />
 	</entity>
 
-</domain-models> 
+</domain-models>

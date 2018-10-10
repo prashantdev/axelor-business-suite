@@ -792,6 +792,7 @@
 "You now have a negative amount of leave available for the reason %s","Vous avez maintenant un montant de congés disponible négatif pour le motif %s",,
 "amount",,,
 "com.axelor.apps.hr.service.batch.HrBatchService",,,
+"http://www.url.com",,,
 "value:Employees Managment","Gestion des employées",,
 "value:Expense Management","Note de frais",,
 "value:Extra hours","Heures supplémentaires",,

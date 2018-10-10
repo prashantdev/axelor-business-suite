@@ -51,6 +51,7 @@
 "Percentage of repartition tickets per state","Pourcentage de la répartition des tickets par état",,
 "Percentage of tickets per SLA & per team","Pourcentage des tickets par SLA & par équipe",,
 "Percentage of tickets per SLA & per user","Pourcentage des tickets par SLA & par utilisateur",,
+"Please select tickets",,,
 "Priority",,,
 "Progress",,,
 "Progress (%)",,,

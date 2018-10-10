@@ -6,8 +6,7 @@
 	<module name="base" package="com.axelor.apps.base.db" />
 
 	<entity name="Company" lang="java" cachable="true">
-
-		<string name="gstin" title="GSTIN" max="15" min="15" />
+		<string name="gstin" max="15" min="15" title="GSTIN" />
 	</entity>
 
 </domain-models>

@@ -365,18 +365,6 @@
 		<context name="_duplicateFinderFields" expr="name" />
 	</action-view>
 
-	<menuitem name="admin-root-organisation-territory-state"
-		parent="admin-root-organisation-territory" title="State"
-		action="admin.root.organisation.territory.state" />
-
-	<action-view name="admin.root.organisation.territory.state"
-		title="State" model="com.axelor.apps.base.db.State">
-		<view type="grid" name="state-grid" />
-		<view type="form" name="state-form" />
-		<context name="_duplicateFinderFields" expr="name" />
-	</action-view>
-
-
 	<menuitem name="admin-root-organisation-territory-department"
 		parent="admin-root-organisation-territory" title="Departments"
 		action="admin.root.organisation.territory.department" />

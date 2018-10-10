@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<menuitem name="gst-root" title="GST" order="-83"
+		if="__config__.app.isApp('gst')" icon="fa-glide-g" icon-background="orange" />
+
+	<menuitem name="gst-root-partner-root" title="Partner" parent="gst-root"
+		icon="fa-user-circle-o" icon-background="green" if="__config__.app.isApp('gst')" />
+
+	<menuitem name="gst-root-partner" title="Partner" action="gst.root.partner"
+		parent="gst-root-partner-root" icon="fa-id-badge" if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.partner" title="Partner"
+		model="com.axelor.apps.base.db.Partner">
+		<view type="grid" name="partner-grid" />
+		<view type="form" name="partner-form" />
+		<view type="cards" name="partner-cards" />
+		<domain>self.gstin != null</domain>
+	</action-view>
+
+	<menuitem name="gst-partner-contact" parent="gst-root-partner-root"
+		icon="fa-phone-square" title="Contact" action="gst.partner.contact"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.partner.contact" title="Contact"
+		model="com.axelor.apps.base.db.Partner">
+		<view type="grid" name="partner-contact-grid" />
+		<view type="form" name="partner-contact-form" />
+	</action-view>
+
+	<menuitem name="gst-partner-configurations" parent="gst-root-partner-root"
+		title="Configurations" icon="fa-server" if="__config__.app.isApp('gst')" />
+
+	<menuitem name="gst-root-partner-address" title="Address"
+		action="gst.root.partner.address" parent="gst-partner-configurations"
+		icon="fa-address-card" if="__config__.app.isApp('gst')" />
+
+	<action-view id="address-gst-form" name="gst.root.partner.address"
+		title="Address" model="com.axelor.apps.base.db.Address">
+		<view type="grid" name="address-grid" />
+		<view type="form" name="address-form" />
+		<domain>self.state != null</domain>
+	</action-view>
+
+	<menuitem name="gst-partnet-city" parent="gst-partner-configurations"
+		title="City" action="gst.partner.city" icon="fa-industry"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.partner.city" title="City"
+		model="com.axelor.apps.base.db.City">
+		<view type="grid" name="city-grid" />
+		<view type="form" name="city-form" />
+		<view-param name="details-view" value="true" />
+	</action-view>
+
+	<menuitem name="gst-root-partner-state" title="State"
+		action="gst.root.partner.state" parent="gst-partner-configurations"
+		icon="fa-industry" if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.partner.state" title="State"
+		model="com.axelor.apps.base.db.State">
+		<view type="grid" name="state-gst-grid" />
+		<view type="form" name="state-gst-form" />
+	</action-view>
+
+	<menuitem name="gst-partner-country" parent="gst-partner-configurations"
+		title="Country" action="gst.partner.country" icon="fa-globe"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.partner.country" title="Country"
+		model="com.axelor.apps.base.db.Country">
+		<view type="grid" name="country-grid" />
+		<view type="form" name="country-form" />
+		<view-param name="details-view" value="true" />
+	</action-view>
+
+	<menuitem name="gst-root-company" title="Company" action="gst.root.company"
+		parent="gst-root" icon="fa-building" icon-background="yellow"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.company" title="Company"
+		model="com.axelor.apps.base.db.Company">
+		<view type="grid" name="company-grid" />
+		<view type="form" name="company-form" />
+		<domain>self.gstin != null</domain>
+	</action-view>
+
+	<menuitem name="gst-root-product" title="Product" parent="gst-root"
+		icon="fa-shopping-cart" icon-background="orange" if="__config__.app.isApp('gst')" />
+
+	<menuitem name="gst-root-sub-product" title="Product"
+		action="gst.root.sub.product" parent="gst-root-product" icon="fa-product-hunt"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.sub.product" title="Product"
+		model="com.axelor.apps.base.db.Product">
+		<view type="grid" name="product-grid" />
+		<view type="form" name="product-form" />
+		<view type="cards" name="product-cards" />
+		<domain>self.gstRate != 0</domain>
+	</action-view>
+
+	<menuitem name="gst-root-product-category" title="Product Category"
+		action="gst.root.product.category" parent="gst-root-product" icon="fa-qrcode"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.product.category" title="Product Category"
+		model="com.axelor.apps.base.db.ProductCategory">
+		<view type="grid" name="product-category-grid" />
+		<view type="form" name="product-category-form" />
+		<domain>self.gstRate != 0</domain>
+	</action-view>
+	
+	<menuitem name="gst-root-invoice" title="Invoice" parent="gst-root"
+		icon="fa-file-text-o" icon-background="pink" if="__config__.app.isApp('gst')" />
+
+	<menuitem name="gst-root-sub-invoice" title="Create Invoice"
+		action="gst.root.sub.invoice" parent="gst-root-invoice"
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.sub.invoice" title="Create Invoice"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="form" name="invoice-form" />
+	</action-view>
+	
+	<menuitem name="gst-root-sub-invoice-draft" title="Draft Invoice"
+		action="gst.root.sub.invoice.draft" parent="gst-root-invoice" 
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.sub.invoice.draft" title="Draft Invoice"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.statusSelect = 1</domain>
+	</action-view>
+	
+	<menuitem name="gst-root-sub-invoice-validated" title="Validated Invoice"
+		action="gst.root.sub.invoice.validated" parent="gst-root-invoice" 
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.sub.invoice.validated" title="Validated Invoice"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.statusSelect = 2</domain>
+	</action-view>
+	
+	<menuitem name="gst-root-sub-invoice-ventilated" title="Ventilated Invoice"
+		action="gst.root.sub.invoice.ventilated" parent="gst-root-invoice" 
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.sub.invoice.ventilated" title="Ventilated Invoice"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.statusSelect = 3</domain>
+	</action-view>
+	
+	<menuitem name="gst-root-sub-invoice-canceled" title="Canceled Invoice"
+		action="gst.root.sub.invoice.canceled" parent="gst-root-invoice" 
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.sub.invoice.canceled" title="Canceled Invoice"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.statusSelect = 4</domain>
+	</action-view>
+	
+	<menuitem name="gst-root-invoice-All" title="All Invoice"
+		action="gst.root.invoice.all" parent="gst-root-invoice" 
+		if="__config__.app.isApp('gst')" />
+
+	<action-view name="gst.root.invoice.all" title="All Invoice"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<view type="kanban" name="invoice-gst-kanban"/>
+	</action-view>
+
+</object-views>

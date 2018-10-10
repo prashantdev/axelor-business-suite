@@ -3,11 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
 
-	<module name="base" package="com.axelor.apps.base.db"/>
+	<module name="base" package="com.axelor.apps.base.db" />
 
-	<entity name="State" cachable="true">
-		<string name="name" required="true" />
-		<many-to-one name="country" ref="Country" required="true" />
+	<entity name="State" lang="java" cachable="true">
+		<string name="name" required="true" title="State" />
+		<many-to-one name="country" ref="Country" required="true"
+			title="Country" />
 	</entity>
-	
+
 </domain-models>

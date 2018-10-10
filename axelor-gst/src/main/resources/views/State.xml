@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
-	<grid name="state-grid" title="State" model="com.axelor.apps.base.db.State">
+	<grid name="state-gst-grid" title="State" model="com.axelor.apps.base.db.State">
 		<field name="name" />
 		<field name="country" />
 	</grid>
 
-	<form name="state-form" title="State" model="com.axelor.apps.base.db.State">
-		<panel title="State" itemSpan="12" css="panel-red">
+	<form name="state-gst-form" title="State" model="com.axelor.apps.base.db.State">
+		<panel>
 			<field name="name" />
 			<field name="country" />
 		</panel>
