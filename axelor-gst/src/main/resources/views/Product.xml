@@ -6,22 +6,27 @@
 	<grid id="product-gst-grid" name="product-grid" title="Products"
 		model="com.axelor.apps.base.db.Product">
 		<toolbar>
+			<button name="catalog" title="Catalog" onClick="action-print-product-catalog"
+				icon="fa-book" />
+			<button name="checkDuplicate" title="Check Duplicate"
+				onClick="action-general-check-duplicate-records" />
 			<button name="CreateInvoice"
-				onClick="com.axelor.apps.gst.web.ProductController:invoiceBtn"
-				title="Create Invoice" />
-			<button name="PrintProduct"
-				onClick="com.axelor.apps.gst.web.ProductController:productReport,action-invoice-line-report-product"
-				title="Print Product" />
+				onClick="com.axelor.apps.gst.web.ProductGstController:invoiceBtn"
+				title="Create Invoice" if="__config__.app.isApp('gst')"/>
 		</toolbar>
 		<field name="code" x-bind="{{code|unaccent|uppercase}}" width="100" />
 		<field name="name" width="300" />
-		 <field name="productCategory" form-view="product-category-form" grid-view="product-category-grid"/>
-	    <field name="productFamily" form-view="product-family-form" grid-view="product-family-grid"/>
-	    <field name="productTypeSelect" width="100"/>
-	   	<field name="salePrice" x-scale="2" />
-	    <field name="unit" width="70" form-view="unit-form" grid-view="unit-grid"/>
-	    <field name="internalDescription" widget="html" width="400" />
+		<field name="productCategory" form-view="product-category-form"
+			grid-view="product-category-grid" />
+		<field name="productFamily" form-view="product-family-form"
+			grid-view="product-family-grid" />
+		<field name="productTypeSelect" width="100" />
+		<field name="salePrice" x-scale="2" />
+		<field name="unit" width="70" form-view="unit-form" grid-view="unit-grid" />
+		<field name="internalDescription" widget="html" width="400" />
 	</grid>
+
+
 
 	<form id="product-gst-form" name="product-form" title="Product"
 		model="com.axelor.apps.base.db.Product" onNew="action-group-base-product-onnew"
@@ -101,8 +106,8 @@
 					<field name="productCategory" canEdit="false" colSpan="12"
 						domain="self.productFamily = :productFamily" form-view="product-category-form"
 						grid-view="product-category-grid" onChange="action-invoice-line-method-get-gstrate" />
-					<field name="gstRate" if="__config__.app.isApp('gst')"/>
-					<field name="hsbn" if="__config__.app.isApp('gst')"/>
+					<field name="gstRate" if="__config__.app.isApp('gst')" />
+					<field name="hsbn" if="__config__.app.isApp('gst')" />
 				</panel>
 				<panel colSpan="12">
 					<field name="inAti" colSpan="6"
@@ -401,16 +406,9 @@
 		</panel-mail>
 	</form>
 
-	<action-method name="action-invoice-line-method-get-gstrate" if-module="axelor-gst">
-		<call class="com.axelor.apps.gst.web.ProductController" method="getGstRate" />
+	<action-method name="action-invoice-line-method-get-gstrate"
+		if-module="axelor-gst">
+		<call class="com.axelor.apps.gst.web.ProductGstController" method="getGstRate" />
 	</action-method>
-
-	<action-report name="action-invoice-line-report-product"
-		design="product.rptdesign" output="demo-${date}${time}" format="pdf" if-module="axelor-gst">
-		<param name="productParameter" expr="eval: _param" />
-		<param name="AttachmentPath"
-			expr="call:com.axelor.apps.gst.web.ProductController:addAttachmentPath()" />
-	</action-report>
-
 
 </object-views>

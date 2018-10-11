@@ -8,9 +8,12 @@ import com.axelor.apps.account.service.invoice.factory.CancelFactory;
 import com.axelor.apps.account.service.invoice.factory.ValidateFactory;
 import com.axelor.apps.account.service.invoice.factory.VentilateFactory;
 import com.axelor.apps.account.service.invoice.generator.InvoiceGenerator;
+import com.axelor.apps.base.db.App;
+import com.axelor.apps.base.db.repo.AppRepository;
 import com.axelor.apps.base.service.alarm.AlarmEngineService;
 import com.axelor.apps.businessproject.service.InvoiceServiceProjectImpl;
 import com.axelor.exception.AxelorException;
+import com.axelor.inject.Beans;
 import com.google.inject.Inject;
 import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
@@ -55,40 +58,29 @@ public class InvoiceGstServiceImpl extends InvoiceServiceProjectImpl {
             invoiceLines.addAll(invoice.getInvoiceLineList());
 
             populate(invoice, invoiceLines);
+            App app = Beans.get(AppRepository.class).all().filter("self.name = 'GST'").fetchOne();
 
-            // List<InvoiceLine> invoiceItem = invoice.getInvoiceLine();
-            BigDecimal amt = new BigDecimal(0);
-            BigDecimal amtIgst = new BigDecimal(0);
-            BigDecimal amtCgst = new BigDecimal(0);
-            BigDecimal amtSgst = new BigDecimal(0);
-            BigDecimal amtGross = new BigDecimal(0);
-            for (InvoiceLine invoiceLine : invoiceLines) {
+            if (app.getActive()) {
+              BigDecimal amt = new BigDecimal(0);
+              BigDecimal amtIgst = new BigDecimal(0);
+              BigDecimal amtCgst = new BigDecimal(0);
+              BigDecimal amtSgst = new BigDecimal(0);
+              BigDecimal amtGross = new BigDecimal(0);
+              for (InvoiceLine invoiceLine : invoiceLines) {
 
-              amt = amt.add(invoiceLine.getNetAmount());
-              amtIgst = amtIgst.add(invoiceLine.getIgst());
-              amtCgst = amtCgst.add(invoiceLine.getCgst());
-              amtSgst = amtSgst.add(invoiceLine.getSgst());
-              amtGross = amtGross.add(invoiceLine.getGrossAmt());
-            }
-            if (invoiceLines.size() != 0) {
-              BigDecimal netAmt = amt.divide(new BigDecimal(invoiceLines.size()));
-              BigDecimal netIgst = amtIgst.divide(new BigDecimal(invoiceLines.size()));
-              BigDecimal netCgst = amtCgst.divide(new BigDecimal(invoiceLines.size()));
-              BigDecimal netSgst = amtSgst.divide(new BigDecimal(invoiceLines.size()));
-              BigDecimal netGross = amtGross.divide(new BigDecimal(invoiceLines.size()));
-
-              invoice.setNetAmount(netAmt);
-              invoice.setNetCgst(netCgst);
-              invoice.setNetIgst(netIgst);
-              invoice.setNetSgst(netSgst);
-              invoice.setGrossAmt(netGross);
+                amt = amt.add(invoiceLine.getNetAmount());
+                amtIgst = amtIgst.add(invoiceLine.getIgst());
+                amtCgst = amtCgst.add(invoiceLine.getCgst());
+                amtSgst = amtSgst.add(invoiceLine.getSgst());
+                amtGross = amtGross.add(invoiceLine.getGrossAmt());
+              }
+              invoice.setNetAmount(amt);
+              invoice.setNetCgst(amtCgst);
+              invoice.setNetIgst(amtIgst);
+              invoice.setNetSgst(amtSgst);
+              invoice.setGrossAmt(amtGross);
               return invoice;
             }
-            invoice.setNetAmount(amt);
-            invoice.setNetCgst(amtCgst);
-            invoice.setNetIgst(amtIgst);
-            invoice.setNetSgst(amtSgst);
-            invoice.setGrossAmt(amtGross);
             return invoice;
           }
         };

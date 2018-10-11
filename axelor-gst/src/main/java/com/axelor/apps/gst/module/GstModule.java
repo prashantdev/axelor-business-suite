@@ -19,9 +19,11 @@ package com.axelor.apps.gst.module;
 
 import com.axelor.app.AxelorModule;
 import com.axelor.apps.account.service.invoice.print.InvoicePrintServiceImpl;
+import com.axelor.apps.base.web.ProductController;
 import com.axelor.apps.businessproject.service.InvoiceServiceProjectImpl;
 import com.axelor.apps.gst.service.invoice.InvoiceGstServiceImpl;
 import com.axelor.apps.gst.service.invoice.print.InvoicePrintServiceGstImpl;
+import com.axelor.apps.gst.web.ProductGstController;
 
 public class GstModule extends AxelorModule {
 
@@ -30,5 +32,6 @@ public class GstModule extends AxelorModule {
 
     bind(InvoiceServiceProjectImpl.class).to(InvoiceGstServiceImpl.class);
     bind(InvoicePrintServiceImpl.class).to(InvoicePrintServiceGstImpl.class);
+    bind(ProductController.class).to(ProductGstController.class);
   }
 }

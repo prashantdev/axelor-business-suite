@@ -812,7 +812,7 @@
 				   if="eval: statusSelect &gt; 2"/>
 	</action-attrs>
 
-    <action-attrs name="action-invoice-attrs-show-validate-button">
+    <action-attrs name="action-invoice-attrs-show-validate-button"> 
         <attribute name="hidden" expr="eval: (statusSelect != null &amp;&amp; statusSelect != 1) || __config__.app.getApp('invoice').getIsVentilationSkipped()" for="validate"/>
         <attribute name="hidden" expr="eval: (statusSelect != null &amp;&amp; statusSelect != 1) || !__config__.app.getApp('invoice').getIsVentilationSkipped()" for="validateAndVentilate"/>
     </action-attrs>

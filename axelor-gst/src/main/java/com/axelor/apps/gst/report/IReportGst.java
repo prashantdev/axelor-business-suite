@@ -17,7 +17,9 @@
  */
 package com.axelor.apps.gst.report;
 
-public interface IReport {
+public interface IReportGst {
 
   public static final String INVOICE_GST = "GstInvoice.rptdesign";
+  public static final String PRODUCT_CATALOG_GST = "ProductCatalogGst.rptdesign";
+  public static final String PRODUCT_SHEET_GST = "ProductSheetGst.rptdesign";
 }

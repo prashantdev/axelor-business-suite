@@ -4,20 +4,20 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 	<form id="invoice-line-gst-form" name="invoice-line-form" title="Invoice line" model="com.axelor.apps.account.db.InvoiceLine" width="large"
-		  onNew="action-account-invoice-line-onnew-group" 
-		  onLoad="action-attrs-account-invoice-line-onnew-onload,action-invoice-line-attrs-readonly-form,action-invoice-line-record-gstrate-hsbn,action-invoice-line-record-netamount,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt">
+		  onNew="action-account-invoice-line-onnew-group"  
+		  onLoad="action-attrs-account-invoice-line-onnew-onload,action-invoice-line-attrs-readonly-form,action-invoice-line-record-gstrate-hsbn,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt">
 		<panel hideIf="!isTitleLine">
 			<field name="productName" colSpan="10" title="Title" requiredIf="isTitleLine"/>
 			<field name="isTitleLine" colSpan="2" onChange="action-invoice-line-method-empty-line" widget="boolean-switch"/>
 		</panel>
 		<panel-tabs hideIf="isTitleLine">
 			<panel name="informations" title="Information">
-				<field name="product" canEdit="false" onChange="action-group-account-invoice-line-product-onchange,action-invoice-line-record-gstrate-hsbn,action-invoice-line-record-netamount,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt" form-view="product-form" grid-view="product-grid" domain="self.isModel = false"/>
+				<field name="product" canEdit="false" onChange="action-group-account-invoice-line-product-onchange,action-invoice-line-record-gstrate-hsbn,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt" form-view="product-form" grid-view="product-grid" domain="self.isModel = false"/>
 				<field name="isTitleLine" colOffset="4" colSpan="2" onChange="action-invoice-line-method-empty-line" widget="boolean-switch"/>
 				<field name="productName" colSpan="12" requiredIf="!isTitleLine"/>
-				<field name="qty" colSpan="3" required="true" onChange="action-group-gst-invoice-line-qty-onchange,action-invoice-line-record-netamount,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt"/>
+				<field name="qty" colSpan="3" required="true" onChange="action-group-gst-invoice-line-qty-onchange,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt"/>
 				<field name="unit" colSpan="3" canEdit="false" form-view="unit-form" grid-view="unit-grid"/>
-				<field name="price" colSpan="3" required="true" onChange="action-group-gst-invoice-line-price-onchange,action-invoice-line-record-netamount,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt" hidden="true"/>
+				<field name="price" colSpan="3" required="true" onChange="action-group-gst-invoice-line-price-onchange,action-invoice-line-record-gst-calc,action-invoice-line-record-grossamt" hidden="true"/>
 				<field name="inTaxPrice" colSpan="3" required="true" onChange="action-invoice-line-method-onchange-intaxprice,action-invoice-line-method-compute,action-invoice-line-method-compute-analytic-distribution,action-budget-validate-exceed-line-amount" hidden="true"/>
 				<panel name="discount" colSpan="12">
 					<field name="discountTypeSelect" colSpan="3" onChange="action-invoice-line-method-compute,action-invoice-line-attrs-discountamount-title,action-invoice-line-method-compute-analytic-distribution,action-budget-validate-exceed-line-amount"/>
@@ -25,7 +25,6 @@
 					<field name="priceDiscounted" colSpan="3" hidden="true"/>
 				</panel>
 				<panel title="GST Calculate" if="__config__.app.isApp('gst')">
-					<field name="netAmount" colSpan="3" />
 					<field name="igst" colSpan="3" />
 					<field name="sgst" colSpan="3" />
 					<field name="cgst" colSpan="3" />
@@ -73,24 +72,19 @@
 		<field name="hsbn" expr="eval: product?.hsbn" />
 	</action-record>
 
-	<action-record name="action-invoice-line-record-netamount"
-		model="com.axelor.apps.account.db.InvoiceLine" if-module="axelor-gst">
-		<field name="netAmount" expr="eval: qty*price" />
-	</action-record>
-
 	<action-record name="action-invoice-line-record-gst-calc"
 		model="com.axelor.apps.account.db.InvoiceLine" if-module="axelor-gst">
-		<field name="igst" expr="eval: netAmount*gstRate"
+		<field name="igst" expr="eval: exTaxTotal*gstRate"
 			if="__parent__?.address.state != __parent__?.company.address.state" />
-		<field name="sgst" expr="eval: (netAmount*gstRate)/2"
+		<field name="sgst" expr="eval: (exTaxTotal*gstRate)/2"
 			if="__parent__?.address.state == __parent__?.company.address.state" />
-		<field name="cgst" expr="eval: (netAmount*gstRate)/2"
+		<field name="cgst" expr="eval: (exTaxTotal*gstRate)/2"
 			if="__parent__?.address.state == __parent__?.company.address.state" />
 	</action-record>
 
 	<action-record name="action-invoice-line-record-grossamt"
 		model="com.axelor.apps.account.db.InvoiceLine" if-module="axelor-gst">
-		<field name="grossAmt" expr="eval: netAmount*(igst+cgst)" />
+		<field name="grossAmt" expr="eval: exTaxTotal+(igst+cgst)" />
 	</action-record>
 
 </object-views>

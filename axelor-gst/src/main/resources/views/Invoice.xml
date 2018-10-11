@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
     <form id="invoice-gst-form" name="invoice-form" title="Invoice" model="com.axelor.apps.account.db.Invoice"
-          onNew="action-account-invoice-onnew-group,action-invoice-attrs-set-contaxt-invoice-from-product"
-          onLoad="action-account-invoice-onload-group">
+          onNew="action-account-invoice-onnew-group,action-group-invoice-on-new-from-product"
+          onLoad="action-account-invoice-onload-group" >
 
         <menubar>
              
@@ -297,11 +297,21 @@
       			<strong>partner : {{partner.fullName}}</strong>
   		]]></template>
 	</kanban>
+	
+	<action-group name="action-group-invoice-on-new-from-product">
+		<action name="action-invoice-attrs-set-contaxt-invoice-from-product" if="_invoiceItem"/>
+		<action name="action-group-account-invoice-partner-onchange" if="_invoiceItem"/>
+		<action name="action-method-invoice-address-str" if="_invoiceItem"/>
+		<action name="save" if="_invoiceItem"/>
+		<action name="action-invoice-method-compute" if="_invoiceItem"/>
+	</action-group>
 
 	<action-attrs name="action-invoice-attrs-set-contaxt-invoice-from-product" if-module="axelor-gst">
 		<attribute name="value" for="invoiceLineList" expr="eval:_invoiceItem"
 			if="_invoiceItem" />
-		<attribute name="value" for="invoiceLineTaxList" expr="eval:_invoiceLineTax" if="_invoiceLineTax"/>
+		<attribute name="value" for="partner" expr="eval:_partner" if="_partner"/>
+		<attribute name="value" for="operationTypeSelect" expr="1" if="_partner"/>
+		<attribute name="value" for="operationSubTypeSelect" expr="1" if="_partner"/>
 	</action-attrs>
 
 </object-views>
